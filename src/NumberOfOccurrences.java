@@ -6,8 +6,13 @@ import java.util.*;
 
 public class NumberOfOccurrences {
     public static void main(String[] args) {
+        Map<Integer, Integer> numbers = readMap();
+        ptintMap(numbers);
+      }
+
+    private static Map<Integer, Integer> readMap() {
         File file = new File("numbers.txt");
-        TreeMap<Integer, Integer> numbers = new TreeMap<>();
+        Map<Integer, Integer> numbers = new TreeMap<>();
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -20,11 +25,15 @@ public class NumberOfOccurrences {
                 numbers.put(number, numberOfOccurrences);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         } finally {
             if (scan != null);
             scan.close();
         }
+        return numbers;
+    }
+
+    private static void ptintMap(Map<Integer, Integer> numbers) {
         for (Map.Entry<Integer, Integer> entry : numbers.entrySet())
             System.out.println(entry.getKey() + " - liczba wystapien: " + entry.getValue());
     }
