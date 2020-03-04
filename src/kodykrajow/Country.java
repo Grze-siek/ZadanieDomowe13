@@ -1,7 +1,7 @@
 package kodykrajow;
 
 public class Country {
-    private String countryCode;
+    private final String countryCode;
     private String countryName;
     private String population;
 

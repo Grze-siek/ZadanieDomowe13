@@ -7,16 +7,13 @@ import java.util.*;
 public class CountriesInformation {
     public static void main(String[] args) {
         File file = new File("countriesCodes.csv");
-        Map<String, Country> countriesData = loadFileIntoTheMap(file);
-        userIntegration(countriesData);
+        Map<String, Country> countriesData = loadCountryByCode(file);
+        String key = readCountryKeyFromKeyboard();
+        printCountry(countriesData, key);
     }
 
-    private static void userIntegration(Map<String, Country> countriesData) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Podaj kod kraju, o którym chcesz zobaczyć informacje:");
-        System.out.println("Dostępne kody: PL, DE, IT, FR, DK");
-        String userData = input.nextLine();
-        switch(userData) {
+    private static void printCountry(Map<String, Country> countriesData, String key) {
+        switch(key) {
             case "PL" : {
                 System.out.println(countriesData.get("PL").toString());
                 break; }
@@ -32,10 +29,9 @@ public class CountriesInformation {
             case "DK" :
                 System.out.println(countriesData.get("DK").toString());
         }
-        input.close();
     }
 
-    private static Map<String, Country> loadFileIntoTheMap(File file) {
+    private static Map<String, Country> loadCountryByCode(File file) {
         Map<String, Country> counties = new HashMap<>();
         List<String[]> countiesList = loadCountries(file);
         for (String[] key : countiesList) {
@@ -68,5 +64,16 @@ public class CountriesInformation {
                 scan.close();
         }
         return countriesList;
+    }
+    private static String readCountryKeyFromKeyboard()
+    {
+        System.out.println("-------------------------------------");
+        System.out.println("Podaj kod kraju, o którym chcesz zobaczyć informacje:");
+        System.out.println("Dostępne kody: PL, DE, IT, FR, DK");
+
+        Scanner input = new Scanner(System.in);
+        String key = input.nextLine();
+        input.close();
+        return key;
     }
 }
